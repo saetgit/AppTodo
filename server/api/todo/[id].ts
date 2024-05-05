@@ -1,4 +1,5 @@
 import { db } from "../../db";
+import {createError,sendError} from "h3"
 export default defineEventHandler((e) => {
   const method = e.req.method;
   const context = e.context;
@@ -15,7 +16,15 @@ export default defineEventHandler((e) => {
           return false;
         });
     
-        if (!todo) throw new Error();
+        if (!todo) {
+            const TodoNotFoundError=createError({
+                statusCode:404,
+                statusMessage:"Todo not found",
+                data:{}
+            });
+
+            sendError(e,TodoNotFoundError)
+        }
     return todo,index
   }
   if (method === "PUT") {
