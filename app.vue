@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const {data}=useFetch("/api/todo")
+const { data } = useFetch("/api/todo")
 </script>
 <template>
   <div>
-  {{ data }}
+    {{ data }}
     <NuxtWelcome />
   </div>
 </template>
